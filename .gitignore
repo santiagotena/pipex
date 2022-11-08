@@ -1,0 +1,9 @@
+# Output files
+obj/
+*.o
+*.a
+a.out
+
+# Specific folders and files
+pipex
+

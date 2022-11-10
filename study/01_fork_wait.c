@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 {
 	int id = fork();
 	int n;
-	int status;
+	// int status;
 
 	if (id == 0)
 	{
@@ -19,7 +19,8 @@ int main(int argc, char **argv)
 	}
 
 	if (id !=0)
-		wait(&status);
+		wait(NULL);
+		// wait(&status);
 	int i;
 	for (i = n; i < n + 5; i++)
 	{

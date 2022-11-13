@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 // Called functions via this method overtake the whole main process.
 // If something is downstream of their call, it does not get excecuted.
@@ -17,6 +18,19 @@ int main(int argc, char **argv )
 	if (pid == 0) 
 	{
 		// Child process
+		int file = open("pingResults.txt", O_WRONLY | O_CREAT, 0777);
+		if (file == -1)
+			return (3);
+
+		printf("The fd to pingResults: %d\n", file);
+		// Duplicate the file and create another fd
+		// int file2 = dup(file);
+		// Duplicate the file and create an specific fd
+		int file2 = dup2(file, STDOUT_FILENO); // Remove stdout
+		// The next statement will not print in terminal
+		printf("The duplicated fd: %d\n", file2);
+		close(file);
+
 		int err = execlp("ping", "ping", "-c", "3", "google.com", NULL);
 		if (err == -1)
 		{

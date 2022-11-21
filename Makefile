@@ -6,7 +6,7 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/27 20:13:25 by stena-he          #+#    #+#              #
-#    Updated: 2022/11/08 21:50:36 by stena-he         ###   ########.fr        #
+#    Updated: 2022/11/21 23:05:02 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ PRINTF_PATH = libraries/ft_printf
 
 # Source and object files
 SRC =	main.c \
+		exec_cmd.c
 
 # Add prefixes
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))

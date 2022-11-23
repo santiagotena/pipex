@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/21 22:47:43 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:20:56 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_cmd_path(char *cmd, char **envp) 
 {
 	int		i;
-	char	*envp_PATH;
+	char	*envp_path;
 	char	**paths;
 	char	*tmp;
 	char	*cmd_path;
@@ -24,10 +24,10 @@ char	*get_cmd_path(char *cmd, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		envp_PATH = ft_strnstr(envp[i], "PATH=", 5);
-		if (envp_PATH)
+		envp_path = ft_strnstr(envp[i], "PATH=", 5);
+		if (envp_path)
 		{
-			envp_PATH = ft_substr(envp_PATH, 5, 200); //Might need less
+			envp_path = ft_substr(envp_path, 5, 200); //Might need less
 			if (!envp)
 				return (NULL); //Malloc Error
 			break;
@@ -35,10 +35,10 @@ char	*get_cmd_path(char *cmd, char **envp)
 		i++;
 	}
 
-	paths = ft_split(envp_PATH, ':');
+	paths = ft_split(envp_path, ':');
 	if (!paths)
 		return (NULL); //Malloc Error
-	free(envp_PATH);
+	free(envp_path);
 	
 	i = 0;
 	while(paths[i])
@@ -67,4 +67,21 @@ char	*get_cmd_path(char *cmd, char **envp)
 	}
 	free(temp);
 	return (NULL); //No path found
+}
+
+int	do_cmd(char **argv, char **envp)
+{
+	char	*cmd_path;
+	char	*options[3] = {argv[1], argv[2], NULL};
+	char	*cmd = argv[1];
+	
+	cmd_path = get_cmd_path(cmd, envp);
+	if (!cmd_path)
+	{
+		perror(cmd_path);
+		return(-1);
+	}
+	execve(cmd_path, options, envp);
+	free(cmd_path);
+	return (0);
 }

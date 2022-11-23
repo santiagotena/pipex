@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:51:11 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/23 23:33:06 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/24 00:15:51 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **envp)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		do_cmd(argv, envp);
+		do_cmd(argv[1], argv[2], envp);
 	}
 
 	pid2 = fork();
@@ -45,7 +45,7 @@ int main(int argc, char **argv, char **envp)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		do_cmd(argv, envp);
+		do_cmd(argv[3], argv[4], envp);
 	}
 	close(fd[0]);
 	close(fd[1]);

@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/23 23:20:56 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:56:25 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,10 @@ char	*get_cmd_path(char *cmd, char **envp)
 	return (NULL); //No path found
 }
 
-int	do_cmd(char **argv, char **envp)
+int	do_cmd(char *cmd, char *flags, char **envp)
 {
 	char	*cmd_path;
-	char	*options[3] = {argv[1], argv[2], NULL};
-	char	*cmd = argv[1];
+	char	*options[3] = {cmd, flags, NULL};
 	
 	cmd_path = get_cmd_path(cmd, envp);
 	if (!cmd_path)

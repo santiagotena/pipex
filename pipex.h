@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/23 22:50:25 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:56:21 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 /* Functions */
 
 // Execute commands //
-int		do_cmd(char **argv, char **envp);
+int		do_cmd(char *cmd, char *flags, char **envp);
 char	*get_cmd_path(char *cmd, char **envp);
 
 // Title //

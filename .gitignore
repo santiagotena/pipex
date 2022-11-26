@@ -4,5 +4,8 @@ obj/
 *.a
 a.out
 
+# README file
+#README.md
+
 # Specific folders and files
 pipex

@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/23 23:56:25 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:23:55 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,37 @@ char	*get_cmd_path(char *cmd, char **envp)
 	return (NULL); //No path found
 }
 
-int	do_cmd(char *cmd, char *flags, char **envp)
+int	do_cmd(char *full_cmd, char **envp)
 {
 	char	*cmd_path;
-	char	*options[3] = {cmd, flags, NULL};
+	char	*options[3];
+	// char	*options[3] = {cmd, flags, NULL};
+	char	**split_cmd;
+	// char	**temp;
 	
-	cmd_path = get_cmd_path(cmd, envp);
+	split_cmd = ft_split(full_cmd, ' ');
+	if (!split_cmd)
+		return (9); //Malloc Error
+	options[0] = split_cmd[0];
+	options[1] = split_cmd[1];
+	options[2] = NULL;
+	
+	cmd_path = get_cmd_path(options[0], envp);
 	if (!cmd_path)
 	{
 		perror(cmd_path);
 		return(-1);
 	}
 	execve(cmd_path, options, envp);
-	free(cmd_path);
-	return (0);
+	return (69); // Should not happen
+	
+	// free(cmd_path);
+	// temp = options;
+	// while (*options)
+	// {
+	// 	free(*options);
+	// 	options++;
+	// }
+	// free(temp);
+	// return (0);
 }

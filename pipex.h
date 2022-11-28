@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/23 23:56:21 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:20:24 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <string.h>
+# include <fcntl.h>
 
 //Custom libraries
 # include "libraries/ft_printf/libft/libft.h"
@@ -42,7 +43,7 @@
 /* Functions */
 
 // Execute commands //
-int		do_cmd(char *cmd, char *flags, char **envp);
+int		do_cmd(char *full_cmd, char **envp);
 char	*get_cmd_path(char *cmd, char **envp);
 
 // Title //

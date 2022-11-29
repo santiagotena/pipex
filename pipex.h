@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/28 22:35:08 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:17:30 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 /* Functions */
 
 // Pipe Setup //
-int		pipe_setup(char **argv, char **envp);
+int		pipe_setup(int argc, char **argv, char **envp);
 
 // Execute commands //
 int		do_cmd(char *full_cmd, char **envp);

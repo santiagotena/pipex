@@ -6,13 +6,13 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/30 02:11:39 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/30 02:16:42 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	pipe_setup(int argc, char **argv, char **envp)
+int	pipes_setup(int argc, char **argv, char **envp)
 {
 	int fd[1024][2];
 	int	pid;

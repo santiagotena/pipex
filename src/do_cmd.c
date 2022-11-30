@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*   do_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/28 21:23:55 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/30 02:22:05 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	do_cmd(char *full_cmd, char **envp)
 		return(-1);
 	}
 	execve(cmd_path, options, envp);
-	return (69); // Should not happen
+	return (69); // Execution failed RIP
 	
 	// free(cmd_path);
 	// temp = options;

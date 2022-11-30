@@ -6,12 +6,13 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/30 02:58:28 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:04:05 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+# define MAX_FD 1024
 
 /* Libraries */
 //Std libraries

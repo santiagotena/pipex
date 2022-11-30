@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/30 02:16:47 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/11/30 02:58:28 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@
 // }					t_stack;
 
 /* Functions */
-
-// Pipe Setup //
+// Pipe setup //
 int		pipes_setup(int argc, char **argv, char **envp);
 
 // Execute commands //
 int		do_cmd(char *full_cmd, char **envp);
 char	*get_cmd_path(char *cmd, char **envp);
+
+// Error management //
+int		msg(char *str1, char *str2, char *str3);
 
 // Title //
 //Subtitle

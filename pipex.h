@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/30 13:04:05 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:21:45 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,16 @@
 # include "libraries/ft_printf/ft_printf.h"
 
 /* Structs */
-//Stacks 
-// typedef struct s_stack
-// {
-// 	int				value;
-// 	int				index;
-// 	int				pos;
-// 	int				target_pos;
-// 	int				cost_a;
-// 	int				cost_b;
-// 	struct s_stack	*next;
-// }					t_stack;
+//Input data 
+typedef struct s_data
+{
+	int				argc;
+	char			**argv;
+	char			**envp;
+	int				i;
+	int				j;
+	struct s_data	*next;
+}					t_data;
 
 /* Functions */
 // Pipe setup //

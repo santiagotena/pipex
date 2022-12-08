@@ -6,11 +6,27 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/08 19:42:27 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:26:41 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+t_data	*assign_inputs(int argc, char **argv, char **envp)
+{
+	t_data	*node;
+	
+	node = malloc(sizeof(t_data));
+	if (!node)
+		return (NULL);
+	node->argc = argc;
+	node->argv = argv;
+	node->envp = envp;
+	node->i = 1;
+	node->j = 0;
+	node->next = NULL;
+	return (node);	
+}
 
 void	close_fds(int argc, int fd[MAX_FD][2])
 {
@@ -57,11 +73,13 @@ int	pipes_setup(int argc, char **argv, char **envp)
 	int file_out; //remove
 	int	i; //keep
 	int j; //keep
+	t_data	*inputs;
 	
 	file_out = 0; //remove
 	i = 1; //keep
 	j = 0; //keep
 	
+	inputs = assign_inputs(argc, argv, envp);
 	first_pipe(argc, argv, envp, fd, &i, &j);
 	i = i + 2;
 	j++;

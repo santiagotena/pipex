@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/08 17:35:08 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:42:27 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,41 +25,46 @@ void	close_fds(int argc, int fd[MAX_FD][2])
 	}
 }
 
-int	pipes_setup(int argc, char **argv, char **envp)
+void	first_pipe(int argc, char **argv, char **envp, int fd[MAX_FD][2], int *i, int *j)
 {
-	int fd[MAX_FD][2];
 	int	pid;
 	int	file_in;
-	int file_out;
-	int	i;
-	int j;
 	
 	file_in = 0;
-	file_out = 0;
-	
-	// Start
-	i = 1;
-	j = 0;
-	if (pipe(fd[j]) < 0)
-			return (2); // pipe error
+	if (pipe(fd[*j]) < 0)
+			return; // pipe error
 	pid = fork();
 	if (pid < 0)
-		return (3); // fork error
+		return; // fork error
 	if (pid == 0)
 	{
-		file_in = open(argv[i], O_RDONLY, 0666);
+		file_in = open(argv[*i], O_RDONLY, 0666);
 		dup2(file_in, STDIN_FILENO);
-		dup2(fd[j][1], STDOUT_FILENO);
+		dup2(fd[*j][1], STDOUT_FILENO);
 		close(file_in);
 
 		close_fds(argc, fd);
 
-		do_cmd(argv[i + 1], envp);
+		do_cmd(argv[*i + 1], envp);
 	}
+	waitpid(pid, NULL, 0);
+}
+
+int	pipes_setup(int argc, char **argv, char **envp)
+{
+	int fd[MAX_FD][2]; //keep
+	int	pid; //remove
+	int file_out; //remove
+	int	i; //keep
+	int j; //keep
+	
+	file_out = 0; //remove
+	i = 1; //keep
+	j = 0; //keep
+	
+	first_pipe(argc, argv, envp, fd, &i, &j);
 	i = i + 2;
 	j++;
-	waitpid(pid, NULL, 0);
-
 	// Middle
 	if (argc > 5)
 	{

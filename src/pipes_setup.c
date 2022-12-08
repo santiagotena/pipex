@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/08 23:51:48 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:04:49 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	first_pipe(t_data **inputs)
 		do_cmd((*inputs)->argv[(*inputs)->i + 1], (*inputs)->envp);
 	}
 	waitpid(pid, NULL, 0);
+	(*inputs)->i = (*inputs)->i + 2;
+	(*inputs)->j++;
 	printf("Exit First pipe \n");
 }
 
@@ -62,7 +64,6 @@ void	mid_pipes(t_data **inputs)
 	int	pid;
 	int fd[MAX_FD][2];
 	
-	// Middle
 	while ((*inputs)->i < ((*inputs)->argc - 2))
 	{
 		if (pipe(fd[(*inputs)->j]) < 0)
@@ -113,7 +114,6 @@ void	last_pipe(t_data **inputs)
 
 	
 		do_cmd((*inputs)->argv[(*inputs)->i], (*inputs)->envp);
-		fprintf(stderr, "Checkpoint 7 Last pipe \n");
 	}
 	waitpid(pid, NULL, WNOHANG);
 	printf("Exit Last pipe \n");
@@ -125,14 +125,8 @@ int	pipes_setup(int argc, char **argv, char **envp)
 		
 	inputs = assign_inputs(argc, argv, envp);
 	first_pipe(&inputs);
-	
-	inputs->i = inputs->i + 2;
-	inputs->j++;
-	
 	if (inputs->argc > 5)
 		mid_pipes(&inputs);
-
 	last_pipe(&inputs);
-	// close_fds(inputs->argc, fd);
 	return (0);
 }

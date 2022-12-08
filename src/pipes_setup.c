@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/08 20:42:13 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:47:00 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ t_data	*assign_inputs(int argc, char **argv, char **envp)
 	node->j = 0;
 	node->next = NULL;
 	return (node);	
-}
-
-void	close_fds(int argc, int fd[MAX_FD][2])
-{
-	int	k;
-	
-	k = 0;
-	while (k < (argc - 4))
-	{
-		close(fd[k][0]);
-		close(fd[k][1]);
-		k++;
-	}
 }
 
 void	first_pipe(t_data **inputs, int fd[MAX_FD][2])

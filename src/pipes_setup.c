@@ -6,11 +6,24 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/30 13:04:17 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:35:08 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	close_fds(int argc, int fd[MAX_FD][2])
+{
+	int	k;
+	
+	k = 0;
+	while (k < (argc - 4))
+	{
+		close(fd[k][0]);
+		close(fd[k][1]);
+		k++;
+	}
+}
 
 int	pipes_setup(int argc, char **argv, char **envp)
 {
@@ -20,7 +33,6 @@ int	pipes_setup(int argc, char **argv, char **envp)
 	int file_out;
 	int	i;
 	int j;
-	int	k;
 	
 	file_in = 0;
 	file_out = 0;
@@ -40,13 +52,7 @@ int	pipes_setup(int argc, char **argv, char **envp)
 		dup2(fd[j][1], STDOUT_FILENO);
 		close(file_in);
 
-		k = 0;
-		while (k < (argc - 4))
-		{
-			close(fd[k][0]);
-			close(fd[k][1]);
-			k++;
-		}
+		close_fds(argc, fd);
 
 		do_cmd(argv[i + 1], envp);
 	}
@@ -69,13 +75,7 @@ int	pipes_setup(int argc, char **argv, char **envp)
 				dup2(fd[j - 1][0], STDIN_FILENO);
 				dup2(fd[j][1], STDOUT_FILENO);
 				
-				k = 0;
-				while (k < (argc - 4))
-				{
-					close(fd[k][0]);
-					close(fd[k][1]);
-					k++;
-				}
+				close_fds(argc, fd);
 				
 				do_cmd(argv[i], envp);
 			}
@@ -96,24 +96,13 @@ int	pipes_setup(int argc, char **argv, char **envp)
 		dup2(file_out, STDOUT_FILENO);
 		close(file_out);
 		
-		k = 0;
-		while (k < (argc - 4))
-		{
-			close(fd[k][0]);
-			close(fd[k][1]);
-			k++;
-		}
+		close_fds(argc, fd);
 	
 		do_cmd(argv[i], envp);
 	}
 	
-	k = 0;
-	while (k < (argc - 4))
-	{
-		close(fd[k][0]);
-		close(fd[k][1]);
-		k++;
-	}
+	close_fds(argc, fd);
+	
 	waitpid(pid, NULL, 0);
 	return (0);
 }

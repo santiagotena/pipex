@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 00:04:49 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:44:38 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_data	*assign_inputs(int argc, char **argv, char **envp)
 	return (node);	
 }
 
-void	first_pipe(t_data **inputs)
+void	first_pipe(t_data **inputs, int fd[MAX_FD][2])
 {
 	printf("Enter First pipe \n");
 	int	pid;
 	int	file_in;
-	int fd[MAX_FD][2];
+	// int fd[MAX_FD][2];
 	
 	file_in = 0;
 	if (pipe(fd[(*inputs)->j]) < 0)
@@ -58,11 +58,11 @@ void	first_pipe(t_data **inputs)
 	printf("Exit First pipe \n");
 }
 
-void	mid_pipes(t_data **inputs)
+void	mid_pipes(t_data **inputs, int fd[MAX_FD][2])
 {
 	printf("Enter Middle pipe \n");
 	int	pid;
-	int fd[MAX_FD][2];
+	// int fd[MAX_FD][2];
 	
 	while ((*inputs)->i < ((*inputs)->argc - 2))
 	{
@@ -87,12 +87,12 @@ void	mid_pipes(t_data **inputs)
 	printf("Exit Middle pipe \n");
 }
 
-void	last_pipe(t_data **inputs)
+void	last_pipe(t_data **inputs, int fd[MAX_FD][2])
 {
 	printf("Enter Last pipe \n");
 	int	pid;
 	int	file_out;
-	int fd[MAX_FD][2];
+	// int fd[MAX_FD][2];
 	
 	file_out = 0;
 	pid = fork();
@@ -122,11 +122,12 @@ void	last_pipe(t_data **inputs)
 int	pipes_setup(int argc, char **argv, char **envp)
 {
 	t_data	*inputs;
+	int 	fd[MAX_FD][2];
 		
 	inputs = assign_inputs(argc, argv, envp);
-	first_pipe(&inputs);
+	first_pipe(&inputs, fd);
 	if (inputs->argc > 5)
-		mid_pipes(&inputs);
-	last_pipe(&inputs);
+		mid_pipes(&inputs, fd);
+	last_pipe(&inputs, fd);
 	return (0);
 }

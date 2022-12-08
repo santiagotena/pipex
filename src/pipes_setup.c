@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/08 20:26:41 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:42:13 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,27 @@ void	close_fds(int argc, int fd[MAX_FD][2])
 	}
 }
 
-void	first_pipe(int argc, char **argv, char **envp, int fd[MAX_FD][2], int *i, int *j)
+void	first_pipe(t_data **inputs, int fd[MAX_FD][2])
 {
 	int	pid;
 	int	file_in;
 	
 	file_in = 0;
-	if (pipe(fd[*j]) < 0)
+	if (pipe(fd[(*inputs)->j]) < 0)
 			return; // pipe error
 	pid = fork();
 	if (pid < 0)
 		return; // fork error
 	if (pid == 0)
 	{
-		file_in = open(argv[*i], O_RDONLY, 0666);
+		file_in = open((*inputs)->argv[(*inputs)->i], O_RDONLY, 0666);
 		dup2(file_in, STDIN_FILENO);
-		dup2(fd[*j][1], STDOUT_FILENO);
+		dup2(fd[(*inputs)->j][1], STDOUT_FILENO);
 		close(file_in);
 
-		close_fds(argc, fd);
+		close_fds((*inputs)->argc, fd);
 
-		do_cmd(argv[*i + 1], envp);
+		do_cmd((*inputs)->argv[(*inputs)->i + 1], (*inputs)->envp);
 	}
 	waitpid(pid, NULL, 0);
 }
@@ -80,7 +80,7 @@ int	pipes_setup(int argc, char **argv, char **envp)
 	j = 0; //keep
 	
 	inputs = assign_inputs(argc, argv, envp);
-	first_pipe(argc, argv, envp, fd, &i, &j);
+	first_pipe(&inputs, fd);
 	i = i + 2;
 	j++;
 	// Middle

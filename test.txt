@@ -1,3 +1,9 @@
 Santiago
 Tena
 Hernandez
+
+Examples:
+valgrind --tool=memcheck --leak-check=yes --leak-resolution=high --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes --track-origins=yes -s --read-inline-info=yes --read-var-info=yes ./pipex test.txt "cat" "wc" "wc -l" "cat" out.txt
+
+leaks --atExit -- ./pipex test.txt "ls -la" "grep rwx" "wc -l" out.txt
+leaks --atExit -- ./pipex test.txt "cat" "wc" "wc -l" "cat" out.txt

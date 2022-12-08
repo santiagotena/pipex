@@ -2,6 +2,7 @@
 obj/
 *.o
 *.a
+*.dSYM
 a.out
 
 # README file

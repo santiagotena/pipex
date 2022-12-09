@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 22:24:51 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:47:51 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_cmd_path(char *cmd, char **envp)
 {
-	struct path vars;
+	path vars;
 
 	vars.i = 0;
 	while (envp[vars.i])

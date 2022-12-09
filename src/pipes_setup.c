@@ -24,7 +24,6 @@ t_data	*assign_inputs(int argc, char **argv, char **envp)
 	node->envp = envp;
 	node->i = 1;
 	node->j = 0;
-	node->next = NULL;
 	return (node);
 }
 

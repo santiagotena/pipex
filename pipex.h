@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 22:45:26 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:32:42 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ typedef struct s_data
 	char			**envp;
 	int				i;
 	int				j;
-	struct s_data	*next;
 }					t_data;
 
-typedef struct Path 
+typedef struct s_path 
 {
 	int		i;
 	char	*envp_path;
@@ -48,7 +47,7 @@ typedef struct Path
 	char	*tmp;
 	char	*cmd_path;
 	char	**temp;
-}					path;
+}					t_path;
 
 /* Functions */
 // Pipe setup //

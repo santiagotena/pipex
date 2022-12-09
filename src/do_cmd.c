@@ -6,13 +6,13 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 23:23:10 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:32:13 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	get_paths(path *vars, char **envp)
+void	get_paths(t_path *vars, char **envp)
 {
 	while (envp[vars->i])
 	{
@@ -32,7 +32,7 @@ void	get_paths(path *vars, char **envp)
 	free(vars->envp_path);
 }
 
-void	correct_path(path *vars)
+void	correct_path(t_path *vars)
 {
 	vars->i = 0;
 	while(vars->paths[vars->i])
@@ -44,7 +44,7 @@ void	correct_path(path *vars)
 	}
 }
 
-void	free_edge(path *vars)
+void	free_edge(t_path *vars)
 {
 	vars->temp = vars->paths;
 	while (*vars->paths)
@@ -57,7 +57,7 @@ void	free_edge(path *vars)
 
 char	*get_cmd_path(char *cmd, char **envp)
 {
-	path vars;
+	t_path vars;
 
 	vars.i = 0;
 	get_paths(&vars, envp);

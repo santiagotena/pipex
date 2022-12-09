@@ -6,31 +6,31 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 22:53:58 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:10:47 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	get_paths(path vars, char **envp)
+void	get_paths(path *vars, char **envp)
 {
-	while (envp[vars.i])
+	while (envp[vars->i])
 	{
-		vars.envp_path = ft_strnstr(envp[vars.i], "PATH=", 5);
-		if (vars.envp_path)
+		vars->envp_path = ft_strnstr(envp[vars->i], "PATH=", 5);
+		if (vars->envp_path)
 		{
-			vars.envp_path = ft_substr(vars.envp_path, 5, 200);
+			vars->envp_path = ft_substr(vars->envp_path, 5, 200);
 			if (!envp)
 				return ; //Malloc Error
 			break;
 		}
-		vars.i++;
+		vars->i++;
 	}
 
-	vars.paths = ft_split(vars.envp_path, ':');
-	if (!vars.paths)
+	vars->paths = ft_split(vars->envp_path, ':');
+	if (!vars->paths)
 		return ; //Malloc Error
-	free(vars.envp_path);
+	free(vars->envp_path);
 }
 
 char	*get_cmd_path(char *cmd, char **envp)
@@ -38,26 +38,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 	path vars;
 
 	vars.i = 0;
-	get_paths(vars, envp);
-
-	vars.i = 0;
-	while (envp[vars.i])
-	{
-		vars.envp_path = ft_strnstr(envp[vars.i], "PATH=", 5);
-		if (vars.envp_path)
-		{
-			vars.envp_path = ft_substr(vars.envp_path, 5, 200);
-			if (!envp)
-				return (NULL); //Malloc Error
-			break;
-		}
-		vars.i++;
-	}
-
-	vars.paths = ft_split(vars.envp_path, ':');
-	if (!vars.paths)
-		return (NULL); //Malloc Error
-	free(vars.envp_path);
+	get_paths(&vars, envp);
 	
 	vars.i = 0;
 	while(vars.paths[vars.i])

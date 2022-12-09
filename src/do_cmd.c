@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 23:10:47 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:23:10 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,33 @@ void	get_paths(path *vars, char **envp)
 		}
 		vars->i++;
 	}
-
 	vars->paths = ft_split(vars->envp_path, ':');
 	if (!vars->paths)
 		return ; //Malloc Error
 	free(vars->envp_path);
+}
+
+void	correct_path(path *vars)
+{
+	vars->i = 0;
+	while(vars->paths[vars->i])
+	{
+		vars->tmp = vars->paths[vars->i];
+		vars->paths[vars->i] = ft_strjoin(vars->tmp, "/");
+		free(vars->tmp);
+		vars->i++;
+	}
+}
+
+void	free_edge(path *vars)
+{
+	vars->temp = vars->paths;
+	while (*vars->paths)
+	{
+		free(*vars->paths);
+		vars->paths++;
+	}
+	free(vars->temp);
 }
 
 char	*get_cmd_path(char *cmd, char **envp)
@@ -39,16 +61,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 
 	vars.i = 0;
 	get_paths(&vars, envp);
-	
-	vars.i = 0;
-	while(vars.paths[vars.i])
-	{
-		vars.tmp = vars.paths[vars.i];
-		vars.paths[vars.i] = ft_strjoin(vars.tmp, "/");
-		free(vars.tmp);
-		vars.i++;
-	}
-
+	correct_path(&vars);
 	vars.i = 0;
 	while (vars.paths[vars.i])
 	{
@@ -58,14 +71,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 		free(vars.cmd_path);
 		vars.i++;
 	}
-	
-	vars.temp = vars.paths;
-	while (*vars.paths)
-	{
-		free(*vars.paths);
-		vars.paths++;
-	}
-	free(vars.temp);
+	free_edge(&vars);
 	return (NULL); //No path found
 }
 

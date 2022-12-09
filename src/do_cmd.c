@@ -6,13 +6,13 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/11/30 02:22:05 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/09 01:24:29 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-char	*get_cmd_path(char *cmd, char **envp) 
+char	*get_cmd_path(char *cmd, char **envp)
 {
 	int		i;
 	char	*envp_path;
@@ -27,7 +27,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 		envp_path = ft_strnstr(envp[i], "PATH=", 5);
 		if (envp_path)
 		{
-			envp_path = ft_substr(envp_path, 5, 200); //Might need less
+			envp_path = ft_substr(envp_path, 5, 200);
 			if (!envp)
 				return (NULL); //Malloc Error
 			break;
@@ -73,9 +73,7 @@ int	do_cmd(char *full_cmd, char **envp)
 {
 	char	*cmd_path;
 	char	*options[3];
-	// char	*options[3] = {cmd, flags, NULL};
 	char	**split_cmd;
-	// char	**temp;
 	
 	split_cmd = ft_split(full_cmd, ' ');
 	if (!split_cmd)
@@ -92,14 +90,4 @@ int	do_cmd(char *full_cmd, char **envp)
 	}
 	execve(cmd_path, options, envp);
 	return (69); // Execution failed RIP
-	
-	// free(cmd_path);
-	// temp = options;
-	// while (*options)
-	// {
-	// 	free(*options);
-	// 	options++;
-	// }
-	// free(temp);
-	// return (0);
 }

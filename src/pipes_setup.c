@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 01:03:17 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 01:17:21 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	first_pipe(t_data **inputs, int fd[MAX_FD][2])
 
 	file_in = 0;
 	if (pipe(fd[(*inputs)->j]) < 0)
-		return ;//pipeerror
+		error_exit("Pipe error");
 	pid = fork();
 	if (pid < 0)
-		return ; // fork error
+		error_exit("Fork error");
 	if (pid == 0)
 	{
 		file_in = open((*inputs)->argv[(*inputs)->i], O_RDONLY, 0666);
@@ -59,10 +59,10 @@ void	mid_pipes(t_data **inputs, int fd[MAX_FD][2])
 	while ((*inputs)->i < ((*inputs)->argc - 2))
 	{
 		if (pipe(fd[(*inputs)->j]) < 0)
-			return ; // pipe error
+			error_exit("Pipe error");
 		pid = fork();
 		if (pid < 0)
-			return ; // fork error
+			error_exit("Fork error");
 		if (pid == 0)
 		{
 			dup2(fd[(*inputs)->j - 1][0], STDIN_FILENO);
@@ -83,7 +83,7 @@ void	last_pipe(t_data **inputs, int fd[MAX_FD][2])
 	file_out = 0;
 	pid = fork();
 	if (pid < 0)
-		return ; // fork error
+		error_exit("Fork error");
 	if (pid == 0)
 	{
 		file_out = open((*inputs)->argv[(*inputs)->i + 1], \

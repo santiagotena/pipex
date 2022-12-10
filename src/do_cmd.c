@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 23:32:13 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 01:36:43 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	get_paths(t_path *vars, char **envp)
 		{
 			vars->envp_path = ft_substr(vars->envp_path, 5, 200);
 			if (!envp)
-				return ; //Malloc Error
+				error_exit("PATH not found");
 			break;
 		}
 		vars->i++;
 	}
 	vars->paths = ft_split(vars->envp_path, ':');
 	if (!vars->paths)
-		return ; //Malloc Error
+		error_exit("env_path parsing failed");
 	free(vars->envp_path);
 }
 
@@ -72,7 +72,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 		vars.i++;
 	}
 	free_edge(&vars);
-	return (NULL); //No path found
+	error_exit("No path was found");
 }
 
 int	do_cmd(char *full_cmd, char **envp)
@@ -83,17 +83,14 @@ int	do_cmd(char *full_cmd, char **envp)
 	
 	split_cmd = ft_split(full_cmd, ' ');
 	if (!split_cmd)
-		return (9); //Malloc Error
+		error_exit("Invalid command");
 	options[0] = split_cmd[0];
 	options[1] = split_cmd[1];
 	options[2] = NULL;
 	
 	cmd_path = get_cmd_path(options[0], envp);
 	if (!cmd_path)
-	{
-		perror(cmd_path);
-		return(-1);
-	}
+		error_exit("The command path could not be determined");
 	execve(cmd_path, options, envp);
-	return (69); // Execution failed RIP
+	error_exit("Execution of command failed");
 }

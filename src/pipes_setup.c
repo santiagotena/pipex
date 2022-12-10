@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 01:17:21 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 14:45:59 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	first_pipe(t_data **inputs, int fd[MAX_FD][2])
 	if (pid == 0)
 	{
 		file_in = open((*inputs)->argv[(*inputs)->i], O_RDONLY, 0666);
+		if (file_in < 0)
+			error_exit((*inputs)->argv[(*inputs)->i]);
 		dup2(file_in, STDIN_FILENO);
 		dup2(fd[(*inputs)->j][1], STDOUT_FILENO);
 		close(file_in);
@@ -88,6 +90,8 @@ void	last_pipe(t_data **inputs, int fd[MAX_FD][2])
 	{
 		file_out = open((*inputs)->argv[(*inputs)->i + 1], \
 			O_RDWR | O_CREAT | O_TRUNC, 0666);
+		if (file_out < 0)
+			error_exit((*inputs)->argv[(*inputs)->i + 1]);
 		dup2(fd[(*inputs)->j - 1][0], STDIN_FILENO);
 		dup2(file_out, STDOUT_FILENO);
 		close(file_out);

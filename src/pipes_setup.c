@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 19:54:36 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 21:46:29 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	first_pipe(t_data **inputs, int fd[MAX_FD][2])
 	file_in = 0;
 	if (pipe(fd[(*inputs)->j]) < 0)
 		error_exit("Pipe error");
+	file_in = open((*inputs)->argv[(*inputs)->i], O_RDONLY, 0666);
+	if (file_in < 0)
+		error_exit((*inputs)->argv[(*inputs)->i]);
 	pid = fork();
 	if (pid < 0)
 		error_exit("Fork error");
 	if (pid == 0)
 	{
-		file_in = open((*inputs)->argv[(*inputs)->i], O_RDONLY, 0666);
-		if (file_in < 0)
-			error_exit((*inputs)->argv[(*inputs)->i]);
 		dup2(file_in, STDIN_FILENO);
 		dup2(fd[(*inputs)->j][1], STDOUT_FILENO);
 		close(file_in);
@@ -50,6 +50,7 @@ void	first_pipe(t_data **inputs, int fd[MAX_FD][2])
 		do_cmd((*inputs)->argv[(*inputs)->i + 1], (*inputs)->envp);
 	}
 	waitpid(pid, NULL, 0);
+	close(file_in);
 	(*inputs)->i = (*inputs)->i + 2;
 	(*inputs)->j++;
 }

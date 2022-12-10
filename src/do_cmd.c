@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 22:47:42 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 14:32:12 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:27:33 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ char	*get_cmd_path(char *cmd, char **envp)
 		vars.i++;
 	}
 	free_edge(&vars);
-	error_exit("No path was found");
+	exec_error(cmd);
 	return (NULL);
 }
 
-int	do_cmd(char *full_cmd, char **envp)
+void	do_cmd(char *full_cmd, char **envp)
 {
 	char	*cmd_path;
 	char	*options[3];
@@ -92,6 +92,5 @@ int	do_cmd(char *full_cmd, char **envp)
 	if (!cmd_path)
 		error_exit("The command path could not be determined");
 	execve(cmd_path, options, envp);
-	exec_error(full_cmd);
-	return (0);
+	return ;
 }

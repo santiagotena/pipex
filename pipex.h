@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 14:25:57 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:26:53 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_path
 int		pipes_setup(int argc, char **argv, char **envp);
 
 // Execute commands //
-int		do_cmd(char *full_cmd, char **envp);
+void	do_cmd(char *full_cmd, char **envp);
 char	*get_cmd_path(char *cmd, char **envp);
 
 // Error management //

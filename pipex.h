@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 22:27:01 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 22:55:25 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
 	int				j;
 }					t_data;
 
-typedef struct s_path 
+typedef struct s_path
 {
 	int		i;
 	char	*envp_path;

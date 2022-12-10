@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 20:45:29 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/08 23:51:27 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:05:13 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	close_fds(int argc, int fd[MAX_FD][2])
 {
 	int	k;
-	
+
 	k = 0;
 	while (k < (argc - 4))
 	{

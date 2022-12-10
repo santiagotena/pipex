@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/09 23:32:42 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/10 00:59:13 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		do_cmd(char *full_cmd, char **envp);
 char	*get_cmd_path(char *cmd, char **envp);
 
 // Error management //
-int		msg(char *str1, char *str2, char *str3);
+void	error_exit(char *message);
 
 // Utils //
 void	close_fds(int argc, int fd[MAX_FD][2]);

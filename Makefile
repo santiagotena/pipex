@@ -6,15 +6,14 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/27 20:13:25 by stena-he          #+#    #+#              #
-#    Updated: 2022/12/10 19:10:55 by stena-he         ###   ########.fr        #
+#    Updated: 2022/12/12 17:37:42 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation
 NAME = 	pipex
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-DEBUG = -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 # Libraries
 LIBFT = libraries/ft_printf/libft/libft.a
@@ -38,24 +37,20 @@ SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRCS:.c=.o)
 
 # Rules
-all: $(OBJ_PATH) $(NAME)
-
-$(OBJ_PATH):
-	mkdir $(OBJ_PATH)
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(MAKE) bonus -C $(LIBFT_PATH)
 	$(MAKE) -C $(PRINTF_PATH)
-	$(CC) $(CFLAGS) $(OBJ) $(MLX) $(LIBFT) $(PRINTF) -o $(NAME)
-	mv $(OBJ) $(OBJ_PATH)
-
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
+	
 clean:
-	rm -rf $(OBJ_PATH)
+	rm -f $(OBJ)
 	$(MAKE) clean -C $(LIBFT_PATH)
 	$(MAKE) clean -C $(PRINTF_PATH)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(OBJ)
 	$(MAKE) fclean -C $(LIBFT_PATH)
 	$(MAKE) fclean -C $(PRINTF_PATH)
 	

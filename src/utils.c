@@ -6,21 +6,20 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 20:45:29 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 02:05:13 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:03:28 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	close_fds(int argc, int fd[MAX_FD][2])
+void	close_fds(void)
 {
 	int	k;
 
-	k = 0;
-	while (k < (argc - 4))
+	k = 3;
+	while (k <= MAX_FD)
 	{
-		close(fd[k][0]);
-		close(fd[k][1]);
+		close(k);
 		k++;
 	}
 }

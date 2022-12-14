@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/14 14:38:49 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:04:14 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	first_pipe(t_data **inputs, int fd[MAX_FD][2])
 		dup2(file_in, STDIN_FILENO);
 		dup2(fd[(*inputs)->j][1], STDOUT_FILENO);
 		close(file_in);
-		close_fds((*inputs)->argc, fd);
+		close_fds();
 		do_cmd((*inputs)->argv[(*inputs)->i + 1], (*inputs)->envp);
 	}
 	waitpid(pid, NULL, 0);
@@ -70,7 +70,7 @@ void	mid_pipes(t_data **inputs, int fd[MAX_FD][2])
 		{
 			dup2(fd[(*inputs)->j - 1][0], STDIN_FILENO);
 			dup2(fd[(*inputs)->j][1], STDOUT_FILENO);
-			close_fds((*inputs)->argc, fd);
+			close_fds();
 			do_cmd((*inputs)->argv[(*inputs)->i], (*inputs)->envp);
 		}
 		(*inputs)->i++;
@@ -96,7 +96,7 @@ void	last_pipe(t_data **inputs, int fd[MAX_FD][2])
 		dup2(fd[(*inputs)->j - 1][0], STDIN_FILENO);
 		dup2(file_out, STDOUT_FILENO);
 		close(file_out);
-		close_fds((*inputs)->argc, fd);
+		close_fds();
 		do_cmd((*inputs)->argv[(*inputs)->i], (*inputs)->envp);
 	}
 	waitpid(pid, NULL, WNOHANG);
@@ -112,7 +112,7 @@ int	pipes_setup(int argc, char **argv, char **envp)
 	if (inputs->argc > 5)
 		mid_pipes(&inputs, fd);
 	last_pipe(&inputs, fd);
-	close_fds(inputs->argc, fd);
+	close_fds();
 	free(inputs);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:51:45 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 22:55:25 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:04:43 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	exec_error(char *full_cmd);
 void	args_error(void);
 
 // Utils //
-void	close_fds(int argc, int fd[MAX_FD][2]);
+void	close_fds(void);
 
 #endif

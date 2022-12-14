@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:24:51 by stena-he          #+#    #+#             */
-/*   Updated: 2022/12/10 21:46:29 by stena-he         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:38:49 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int	pipes_setup(int argc, char **argv, char **envp)
 	if (inputs->argc > 5)
 		mid_pipes(&inputs, fd);
 	last_pipe(&inputs, fd);
+	close_fds(inputs->argc, fd);
 	free(inputs);
 	return (0);
 }

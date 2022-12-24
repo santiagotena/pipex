@@ -4,7 +4,7 @@
 <img src="https://github.com/santiagotena/assets/blob/master/logos/42%20logo.jpeg?raw=true" alt="42 Wolfsburg Logo" width="150" height="150">
 </p>
  
-Pipex is a project from 42 Wolfsburg whose aim is to replicate the functionality of the shell commands that have pipes within them.
+Pipex is a project from 42 Wolfsburg whose aim is to replicate the functionality of shell commands that have pipes within them.
  
 We are meant to replicate the following kind of shell command:
  
